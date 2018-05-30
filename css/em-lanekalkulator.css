@@ -1,0 +1,63 @@
+.em-lanekalkulator {
+	background-color: #aab;
+	display: inline-block;
+	padding: 1rem;
+
+	text-align: right;
+
+	box-sizing: border-box;
+	width: 20rem;
+}
+
+.em-kalk-input-container {
+	margin-bottom: 1rem;
+	/*background-color: red;*/
+}
+
+.em-kalk-ic {
+	background-color: rgba(255,255,255,.5);
+	border-radius: 5px;
+	padding-right: 2px;
+	white-space: nowrap;
+}
+
+.em-kalk-title {
+	margin: 0;
+}
+
+.em-kalk-span {
+	user-select: none;
+}
+
+/*.em-kalk-input,*/
+.em-kalk-range {
+	display: block;
+	width: 100%;
+	box-sizing: border-box;
+	margin: 0;
+	margin-bottom: 0.5rem;
+	/*text-align: right;*/
+
+	/*size: 50rem;*/
+	/*border: solid 1px black;*/
+}
+
+.em-kalk-input {
+	background-color: rgba(0, 0, 0, 0);
+	outline: none;
+	text-align: right;
+	border: none;
+	width: 6rem;
+	/*display: inline;*/
+	/*padding-right: 1rem;*/
+}
+
+input[type=number]::-webkit-inner-spin-button {
+	/*margin-left: 1rem;*/
+	/*opacity: 1;*/
+	display: none;
+}
+
+.em-kalk-info-container {
+	/*margin-left: 1rem;*/
+}
