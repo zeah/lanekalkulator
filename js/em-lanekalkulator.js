@@ -1,5 +1,13 @@
 (function() {
 
+	var loc = location.origin;
+
+	if (loc.indexOf('localhost') != -1) loc += '/wordpress';
+
+	var style = document.createElement('style');
+	style.innerHTML = '.em-lanekalkulator:after { background-image: url(\''+loc+'/wp-content/plugins/emlanekalkulator/img/128-29.jpg\')}';
+	document.head.appendChild(style);
+
 	var container = document.querySelector('.em-lanekalkulator');
 
 	if (!container) return;
@@ -18,7 +26,7 @@
 
 	var l = 250000;
 	var r = 15;
-	var a = 12;
+	var a = 5;
 
 	var newdiv = function(o) {
 		var div = document.createElement('div');
@@ -39,7 +47,8 @@
 		var input = document.createElement('input');
 		if (o.class) input.classList.add(o.class);
 		
-		if (o.value) input.setAttribute('value', o.value);
+		if (o.value) input.value = o.value;
+		// if (o.value && o.type != 'range') input.setAttribute('value', o.value);
 		
 		if (o.min) input.setAttribute('min', o.min);
 		if (o.max) input.setAttribute('max', o.max);
@@ -65,9 +74,12 @@
 	}
 
 	function writeMP() {
-		info_text.innerHTML = monthlyPayment(l, a, r/100/12)+' kr';
+		info_text.innerHTML = monthlyPayment(l, a*12, r/100/12)+' kr';
 	}
 
+	var container_title = newspan({class: 'em-kalk-container-title', text: 'Lånekalkulator'});
+
+	container.appendChild(container_title);
 
 	var input_container = document.createElement('div');
 
@@ -93,7 +105,9 @@
 
 	belop.appendChild(ic_belop);
 
-	var range_belop = newinput({class: 'em-kalk-range', value: l, type: 'range', min: 5000, max: 500000, step: 5000});
+	var range_belop = newinput({class: 'em-kalk-range', type: 'range', min: 5000, max: 500000, step: 5000});
+	// var range_belop = newinput({class: 'em-kalk-range', value: l, type: 'range', min: 5000, max: 500000, step: 5000});
+	range_belop.value = l; // edge fix
 	belop.appendChild(range_belop);
 
 	range_belop.addEventListener('input', function(e) {
@@ -111,7 +125,7 @@
 	
 	var ic_alder = newdiv({class: 'em-kalk-ic'});
 
-	var input_alder = newinput({class: 'em-kalk-input', value: a, type: 'number', step: 1})
+	var input_alder = newinput({class: 'em-kalk-input', value: a, type: 'number', min: 1, max: 15, step: 1})
 	input_alder.addEventListener('input', function(e) {
 		range_alder.value = e.target.value;
 		a = e.target.value;
@@ -120,11 +134,12 @@
 	ic_alder.appendChild(input_alder);
 	// input_alder.setAttribute('disabled', '');
 
-	ic_alder.appendChild(newspan({class: 'em-kalk-span', text: ' måneder'}));
+	ic_alder.appendChild(newspan({class: 'em-kalk-span', text: ' år'}));
 
 	alder.appendChild(ic_alder);
 
-	var range_alder = newinput({class: 'em-kalk-range', value: a, type: 'range', min: 5, max: 60, step: 1});
+	var range_alder = newinput({class: 'em-kalk-range', type: 'range', min: 1, max: 15, step: 1});
+	range_alder.value = a; // edge fix
 	alder.appendChild(range_alder);
 
 	range_alder.addEventListener('input', function(e) {
@@ -136,11 +151,11 @@
 
 	// rente 
 	var rente = newdiv({class: 'em-kalk-input-container'});
-	rente.appendChild(newh4({class: 'em-kalk-title', text: 'Effektiv Rente'}))
+	rente.appendChild(newh4({class: 'em-kalk-title', text: 'Rente'}))
 	
 	var ic_rente = newdiv({class: 'em-kalk-ic'});
 
-	var input_rente = newinput({class: 'em-kalk-input', value: r, type: 'number', step: 0.05})
+	var input_rente = newinput({class: 'em-kalk-input', value: r, type: 'number', min: 0.1, max: 40, step: 0.01})
 	input_rente.addEventListener('input', function(e) {
 		range_rente.value = e.target.value;
 		r = e.target.value;
@@ -153,7 +168,8 @@
 
 	rente.appendChild(ic_rente);
 
-	var range_rente = newinput({class: 'em-kalk-range', value: r, type: 'range', min: 2, max: 30, step: 0.05});
+	var range_rente = newinput({class: 'em-kalk-range',type: 'range', min: 2, max: 30, step: 0.05});
+	range_rente.value = r; // edge fix
 	rente.appendChild(range_rente);
 
 	range_rente.addEventListener('input', function(e) {
@@ -183,7 +199,8 @@
 
 	info_container.appendChild(info_title);
 
-	var info_text = document.createElement('span'); 
+	// var info_text = document.createElement('span'); 
+	var info_text = newspan({class: 'em-kalk-result'});
 	// info_text.innerHTML = writeMP(lan, alder, rente)
 	// info_text.appendChild(writeMP(lan, alder, rente))
 

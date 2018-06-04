@@ -1,5 +1,6 @@
 .em-lanekalkulator {
-	background-color: #aab;
+	position: relative;
+	background-color: #abd;
 	display: inline-block;
 	padding: 1rem;
 
@@ -7,6 +8,36 @@
 
 	box-sizing: border-box;
 	width: 20rem;
+	margin-left: 1rem;
+
+	border: solid 2px #bbc;
+	border-radius: 5px;
+	z-index: 2;
+	/*background-image: url('img/127-174.jpg');*/
+}
+
+.em-lanekalkulator:after {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	content: '';
+	z-index: -1;
+	opacity: 0.2;
+	/*background-image: url('http://localhost/wordpress/wp-content/plugins/emlanekalkulator/img/128-174.jpg');*/
+}
+
+.em-kalk-container-title {
+	display: block;
+	text-align: center;
+	font-size: 2.4rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+	border-radius: 4px;
+	/*background-color: #eef;*/
+	/*border-bottom: 2px solid black;*/
+	user-select: none;
 }
 
 .em-kalk-input-container {
@@ -15,14 +46,19 @@
 }
 
 .em-kalk-ic {
-	background-color: rgba(255,255,255,.5);
+	background-color: #fff;
+	/*background-color: rgba(255,255,255,1);*/
 	border-radius: 5px;
 	padding-right: 2px;
 	white-space: nowrap;
+	border: solid 2px #99c;
+	border-bottom: 3px #336 solid;
+
 }
 
 .em-kalk-title {
 	margin: 0;
+	user-select: none;
 }
 
 .em-kalk-span {
@@ -33,6 +69,7 @@
 .em-kalk-range {
 	display: block;
 	width: 100%;
+	/*height: 20px;*/
 	box-sizing: border-box;
 	margin: 0;
 	margin-bottom: 0.5rem;
@@ -47,9 +84,25 @@
 	outline: none;
 	text-align: right;
 	border: none;
-	width: 6rem;
+	width: 50%;
+	font-family: inherit;
+	font-size: inherit;
+
+	/*border-bottom: 2px black solid;*/
 	/*display: inline;*/
 	/*padding-right: 1rem;*/
+}
+
+.em-kalk-result {
+	background-color: #eef;
+	padding: 0 0.5rem;
+	/*margin-top: 1rem;*/
+	border-radius: 5px;
+	border-bottom: 2px solid black;
+	border-top: 2px solid black;
+	user-select: none;
+	font-size: 3rem;
+
 }
 
 input[type=number]::-webkit-inner-spin-button {
@@ -58,6 +111,62 @@ input[type=number]::-webkit-inner-spin-button {
 	display: none;
 }
 
-.em-kalk-info-container {
+
+
+/*.em-kalk-info-container {*/
 	/*margin-left: 1rem;*/
+/*}*/
+
+
+/*input[type=range]::-ms-track {
+width: 250px;height: 10px;
+background: transparent;
+border-color: transparent;
+border-width: 6px 0;
+color: transparent;
+}
+
+input[type=range]::-ms-fill-upper {
+background: gray;
+border-radius: 6px;
+}
+input[type=range]::-ms-fill-lower {
+background: gray;
+border-radius: 6px;
+}*/
+
+.em-kalk-range {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 100%; 
+    height: 2rem; 
+    background-color: inherit;
+    outline: none; 
+    cursor: pointer; 
+}
+
+.em-kalk-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    cursor: pointer; 
+    width: 0; 
+  	height: 0; 
+  	border-left: 20px solid transparent;
+  	border-right: 20px solid transparent;
+  	border-bottom: 20px solid #336;
+}
+
+/*.em-kalk-range::-webkit-slider-thumb:hover {
+  	border-left: 20px solid transparent;
+  	border-right: 20px solid transparent;
+  	border-bottom: 20px solid #eee;
+}*/
+
+.em-kalk-range::-moz-range-thumb {
+    cursor: pointer; 
+    width: 0; 
+  	height: 0; 
+  	border-left: 20px solid transparent;
+  	border-right: 20px solid transparent;
+  	border-bottom: 20px solid black;
 }
